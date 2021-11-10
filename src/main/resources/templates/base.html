@@ -1,0 +1,18 @@
+<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+    <title>Title</title>
+</head>
+<body>
+    <nav id="naviBar" th:replace="~{fragments/navibar :: naviBar}"></nav>
+    
+    <div id="container">  
+    	<div id="section">
+    		<div th:each="PostIndex: ${section}"th:utext="${PostIndex.text} + ${PostIndex.date}"></div>	
+    	</div>	
+	</div>
+    <footer id="footer" th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
