@@ -1,0 +1,23 @@
+<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+    <title>Novo post</title>
+</head>
+<body>
+    <nav id="naviBar" th:replace="~{fragments/navibar :: naviBar}"></nav>
+    
+    <div id="container">  
+    	<div id="section">
+    		<form action="/addPost" method="post" id="conteudo">
+    			<textarea rows="1" cols="1" name="text"></textarea>
+    			<input type="date" name="date">
+    			<br>
+    			<button type="submit">Postar</button>
+    		</form>
+    	</div>	
+	</div>
+    <footer id="footer" th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

@@ -92,6 +92,40 @@ footer ul li{
 }
 
 button{
-    background: none;
+    background: black;
     border: none;
 }
+button:hover{
+	background: purple;
+}
+
+
+
+#conteudo{
+	width: 100%;
+	height: 60%;
+}
+
+#conteudo textarea{
+	color: black;
+	width: 100%;
+	height: 100%;
+	font-size: 12pt;
+}
+
+#conteudo input[type="date"]{
+	color: black;
+}
+
+#conteudo button{
+	color: black;
+	background-color: white;
+	width: 8%;
+	height: 4%;
+}
+
+/* User options */
+.UserOptions {
+	text-align: end;
+}
+

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+    <title>Title</title>
+</head>
+<body>
+    <nav id="naviBar" th:replace="~{fragments/navibar :: naviBar}"></nav>
+    
+    <div id="container">  
+    	<div id="section">
+    		<h3 th:text="${errorMessage}"></h3>
+    		<form action="/login" method="post">
+    		<label>login: </label> <input type="text" name="userName">
+    		<label>password: </label> <input type="password" name="password">
+    		<button type="submit">Logar</button>
+    		</form>
+    	</div>	
+	</div>
+    <footer id="footer" th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
