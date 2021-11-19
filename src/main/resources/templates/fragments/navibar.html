@@ -1,16 +1,40 @@
 <html>
 <head>
-   <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
-   <footer id="footer" th:fragment="footer">
-   <nav id="naviBar" th:fragment="naviBar">
-      <ul>
-         <li><a href="/">Início</a></li>
-         <li><a href="/projetos">Projetos</a></li>
-         <li><a href="/sobre-mim">Sobre mim</a></li>
-         <li><a href="/novo-post">add post</a></li>
-      </ul>
-   </nav>
+
+	<nav id="naviBar"
+		class="navbar sticky-top navbar-expand-sm bg-dark navbar-dark"
+		th:fragment="naviBar">
+		<div class="container">
+			<a href="/" class="navbar-brand">Início</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav">
+					<li><a class="nav-link" href="#">Projetos</a></li>
+					<li><a class="nav-link" href="#">Sobre mim</a></li>
+
+				</ul>
+				<div th:if="${session.userNavbar == null}" class="navbar-nav ms-auto">
+					<ul class="navbar-nav ms-auto"
+						th:replace="~{userNavbar/default :: userNavbar}">
+
+					</ul>
+				</div>
+				<div th:unless="${session.userNavbar == null}" class="navbar-nav ms-auto">
+					<ul class="navbar-nav ms-auto"
+						th:replace="~{${session.userNavbar} :: userNavbar}">
+
+					</ul>
+				</div>
+
+
+
+			</div>
+
+
+		</div>
+
+	</nav>
 </body>
 </html>

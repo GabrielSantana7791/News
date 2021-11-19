@@ -22,24 +22,25 @@ public class SessionController {
 	public Login login;
 
 	@PostMapping(value="/login")
-	public String login(HttpSession session, User user, HttpServletRequest response) {
-		session.setAttribute("user", user);
-		response.setAttribute("errorMessage", "Usuário incorreto");
-
+	public String login(HttpSession session, User RequisitionUser, HttpServletRequest response) {
 		try {
-			login.testCredencial(user);
+			//throw exception
+			User user = login.userTestCredencial(RequisitionUser);
+			session.setAttribute("user", user);
+			session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
 			return "redirect:/";
 		} catch (Exception e) {
+			response.setAttribute("errorMessage", "Usuário incorreto");
 			return "pages/login";
 		}
-		
+
 	}
 
 	@GetMapping(value="/login")
 	public String login (HttpSession session, HttpServletResponse response) {
-		User user = (User) session.getAttribute("user");
 		try {
-			return login.redirectUrl(user, "redirect:/");
+			User user = (User) session.getAttribute("user");
+			return login.validateAndRedirect(user, "redirect:/");
 		} catch (Exception e) {
 			return "/pages/login";
 		}

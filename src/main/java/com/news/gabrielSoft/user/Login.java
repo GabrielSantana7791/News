@@ -11,14 +11,15 @@ public class Login {
 	@Autowired
 	UserRepository userRep;
 
-	public void testCredencial(User user) throws Exception{
+	public User userTestCredencial(User user) throws Exception{
 		if(userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword()) == null) {
 			throw new Exception("Usuário não existe");
 		}
+		return userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 	}
 
-	public String redirectUrl(User user, String url) throws Exception{
-		testCredencial(user);
+	public String validateAndRedirect(User user, String url) throws Exception{
+		userTestCredencial(user);
 		return url;
 	}
 }

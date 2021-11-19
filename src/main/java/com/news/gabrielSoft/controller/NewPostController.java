@@ -24,18 +24,18 @@ public class NewPostController {
 	public String newPage(HttpSession session) {
 		try {
 			User user = (User) session.getAttribute("user");
-			return login.redirectUrl(user, "pages/newPost");
+			return login.validateAndRedirect(user, "pages/newPost");
 		} catch (Exception e) {
 			return "redirect:/login";
 		}
 	}
 
 	@PostMapping(value= "/addPost")
-	public String addPost(PostIndex pi, HttpSession session) {
+	public String addPost(PostIndex postIndex, HttpSession session) {
 		try{
 			User user = (User) session.getAttribute("user");
-			login.testCredencial(user);
-			indexRep.save(pi);
+			login.userTestCredencial(user);
+			indexRep.save(postIndex);
 			return "pages/newPost";
 		}catch(Exception e) {
 			return "redirect:/login";

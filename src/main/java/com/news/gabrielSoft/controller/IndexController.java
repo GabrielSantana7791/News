@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.news.gabrielSoft.entity.PostIndex;
-import com.news.gabrielSoft.entity.User;
 import com.news.gabrielSoft.repository.PostIndexRepository;
 
 @Controller
@@ -20,8 +19,6 @@ public class IndexController {
 
 	@GetMapping(value="/")
 	public String Index(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-	
 		List<PostIndex> listPost = newsRep.findAll();
 
 		model.addAttribute("section", listPost);
