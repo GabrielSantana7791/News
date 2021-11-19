@@ -9,7 +9,7 @@ public class ProjectsController {
 	@GetMapping(value= "/projetos")
 	public String Projects() {
 		
-		return "pages/projects";
+		return "base";
 	}
 
 }

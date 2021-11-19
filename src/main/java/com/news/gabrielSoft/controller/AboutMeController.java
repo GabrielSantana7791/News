@@ -9,7 +9,7 @@ public class AboutMeController {
 	@GetMapping(value= "/sobre-mim")
 	public String AboutMe() {
 		
-		return "pages/aboutMe";
+		return "base";
 	}
 
 }

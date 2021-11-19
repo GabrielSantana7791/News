@@ -1,34 +1,10 @@
-<!DOCTYPE HTML SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<title>Novo post</title>
-</head>
-<body>
-	<nav id="naviBar"
-		class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark"
-		th:replace="~{fragments/navibar :: naviBar}"></nav>
+<div class="container" th:fragment="section">
+	<div class="alert alert-success" role="alert"
+		th:if="${message == 'true'}">Publicado com sucesso</div>
 
-	<div id="container">
-		<div id="section" class="container">
-			<form action="/addPost" method="post" id="conteudo">
-				<textarea rows="1" cols="1" name="text"></textarea>
-				<input type="date" name="date"> <br>
-				<button type="submit">Postar</button>
-			</form>
-		</div>
-	</div>
-	<footer id="footer" th:replace="~{fragments/footer :: footer}"></footer>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-</body>
-</html>
+	<form action="/addPost" method="post" id="conteudo">
+		<textarea rows="1" cols="1" name="text"></textarea>
+		<input type="date" name="date"> <br>
+		<button type="submit">Postar</button>
+	</form>
+</div>

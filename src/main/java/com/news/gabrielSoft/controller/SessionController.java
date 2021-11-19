@@ -1,17 +1,17 @@
 package com.news.gabrielSoft.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.news.gabrielSoft.entity.User;
 import com.news.gabrielSoft.repository.UserRepository;
 import com.news.gabrielSoft.user.Login;
+import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
 
 @Controller
 public class SessionController {	
@@ -22,7 +22,7 @@ public class SessionController {
 	public Login login;
 
 	@PostMapping(value="/login")
-	public String login(HttpSession session, User RequisitionUser, HttpServletRequest response) {
+	public String login(HttpSession session, User RequisitionUser,Model model) {
 		try {
 			//throw exception
 			User user = login.userTestCredencial(RequisitionUser);
@@ -30,24 +30,28 @@ public class SessionController {
 			session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
 			return "redirect:/";
 		} catch (Exception e) {
-			response.setAttribute("errorMessage", "Usuário incorreto");
-			return "pages/login";
-		}
+			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "login");
+			model.addAttribute(MODEL_ATTRIBUTES.errorMessage.toString(), "Usuário incorreto");
 
+			return "base";
+
+		}
 	}
 
 	@GetMapping(value="/login")
-	public String login (HttpSession session, HttpServletResponse response) {
+	public String login (Model model, HttpSession session) {
 		try {
+			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "login");
+			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Login");
 			User user = (User) session.getAttribute("user");
 			return login.validateAndRedirect(user, "redirect:/");
 		} catch (Exception e) {
-			return "/pages/login";
+			return "base";
 		}
 	}
 
 	@GetMapping(value="/deslogar")
-	public String login (HttpSession session) {
+	public String deslogar (HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
 	}
