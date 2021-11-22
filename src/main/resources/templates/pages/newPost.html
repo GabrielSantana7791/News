@@ -3,6 +3,7 @@
 		th:if="${message == 'true'}">Publicado com sucesso</div>
 
 	<form action="/addPost" method="post" id="conteudo">
+		<label>Título</label> <input type="text" name="title"> <br>
 		<textarea rows="1" cols="1" name="text"></textarea>
 		<input type="date" name="date"> <br>
 		<button type="submit">Postar</button>

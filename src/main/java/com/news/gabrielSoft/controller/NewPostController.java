@@ -13,6 +13,7 @@ import com.news.gabrielSoft.entity.User;
 import com.news.gabrielSoft.repository.PostIndexRepository;
 import com.news.gabrielSoft.user.Login;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
 public class NewPostController {
@@ -28,8 +29,11 @@ public class NewPostController {
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
 			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Adicionar novo post");
 			User user = (User) session.getAttribute("user");
-			return login.validateAndRedirect(user, "base");
+
+			login.userTestCredencial(user, "admin");
+			return "base";
 		} catch (Exception e) {
+			System.out.println(e);
 			return "redirect:/login";
 		}
 	}
@@ -38,7 +42,7 @@ public class NewPostController {
 	public String addPost(PostIndex postIndex, HttpSession session, Model model) {
 		try{
 			User user = (User) session.getAttribute("user");
-			login.userTestCredencial(user);
+			login.userTestCredencial(user, USER_ADMIN_LEVEL.admin.toString());
 			indexRep.save(postIndex);
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "true");

@@ -10,13 +10,10 @@ public class PostIndex{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String text;
 	private String title;
-	private String date; //alterar
+	private String date; //alterar	
 	
-	
-
 	public int getId() {
 		return id;
 	}
@@ -50,7 +47,5 @@ public class PostIndex{
 		
 	this.date = d;
 	}
-	
-	
 
 }

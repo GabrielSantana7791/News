@@ -30,6 +30,7 @@ public class SessionController {
 			session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
 			return "redirect:/";
 		} catch (Exception e) {
+			System.out.println(e);
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "login");
 			model.addAttribute(MODEL_ATTRIBUTES.errorMessage.toString(), "Usuário incorreto");
 
@@ -43,8 +44,10 @@ public class SessionController {
 		try {
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "login");
 			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Login");
+			
 			User user = (User) session.getAttribute("user");
-			return login.validateAndRedirect(user, "redirect:/");
+			login.userTestCredencial(user);
+			return "redirect:/";
 		} catch (Exception e) {
 			return "base";
 		}

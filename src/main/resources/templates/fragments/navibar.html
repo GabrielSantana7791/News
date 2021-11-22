@@ -3,9 +3,8 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
 	<nav id="naviBar"
-		class="navbar sticky-top navbar-expand-sm bg-dark navbar-dark"
+		class="navbar sticky-top navbar-expand-md bg-dark navbar-dark"
 		th:fragment="naviBar">
 		<div class="container">
 			<a href="/" class="navbar-brand">Início</a>
@@ -13,28 +12,23 @@
 				<ul class="navbar-nav">
 					<li><a class="nav-link" href="#">Projetos</a></li>
 					<li><a class="nav-link" href="#">Sobre mim</a></li>
-
 				</ul>
-				<div th:if="${session.userNavbar == null}" class="navbar-nav ms-auto">
+
+				<div th:if="${session.userNavbar == null}"
+					class="navbar-nav ms-auto">
 					<ul class="navbar-nav ms-auto"
 						th:replace="~{userNavbar/default :: userNavbar}">
-
 					</ul>
 				</div>
-				<div th:unless="${session.userNavbar == null}" class="navbar-nav ms-auto">
+
+				<div th:unless="${session.userNavbar == null}"
+					class="navbar-nav ms-auto">
 					<ul class="navbar-nav ms-auto"
 						th:replace="~{${session.userNavbar} :: userNavbar}">
-
 					</ul>
 				</div>
-
-
-
 			</div>
-
-
 		</div>
-
 	</nav>
 </body>
 </html>

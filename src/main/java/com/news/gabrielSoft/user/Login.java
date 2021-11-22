@@ -12,14 +12,20 @@ public class Login {
 	UserRepository userRep;
 
 	public User userTestCredencial(User user) throws Exception{
-		if(userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword()) == null) {
-			throw new Exception("Usuário não existe");
+		user = userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		
+		return user;
+	}
+	
+	public User userTestCredencial(User user, String userLevel) throws Exception{
+		user = userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		
+		if(userLevel.equals(user.getUserLevel())) {
+			System.out.println(user.getUserLevel());
+			return user;
 		}
-		return userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+		
+		throw new Exception("Usuário nsão existe");
 	}
-
-	public String validateAndRedirect(User user, String url) throws Exception{
-		userTestCredencial(user);
-		return url;
-	}
+	
 }

@@ -14,6 +14,7 @@ public class User {
 	private String userName;
 	private String password;
 	//add onetomany
+	// gambiarra USER_ADMIN_LEVEL
 	private String userLevel;
 	
 	public int getId() {
