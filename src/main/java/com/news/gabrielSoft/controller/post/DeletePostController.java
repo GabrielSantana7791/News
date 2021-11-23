@@ -1,4 +1,4 @@
-package com.news.gabrielSoft.controller;
+package com.news.gabrielSoft.controller.post;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,44 +16,33 @@ import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
-public class NewPostController {
+public class DeletePostController {
 	@Autowired
 	private PostIndexRepository indexRep;
 
 	@Autowired
 	private Login login;
-
-	@GetMapping(value= "/novo-post")
-	public String newPage(Model model, HttpSession session) {
-		try {
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
-			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Adicionar novo post");
-			User user = (User) session.getAttribute("user");
-
-			login.userTestCredencial(user, "admin");
-			return "base";
-		} catch (Exception e) {
-			System.out.println(e);
-			return "redirect:/login";
-		}
+	
+	@GetMapping(value= "/deletePost")
+	public String deletePost() {
+		return "redirect:/";
 	}
 
-	@PostMapping(value= "/addPost")
-	public String addPost(PostIndex postIndex, HttpSession session, Model model) {
+	@PostMapping(value= "/deletePost")
+	public String deletePost(int postId, HttpSession session, Model model) {
+		System.out.println(postId);
 		try{
 			User user = (User) session.getAttribute("user");
 			login.userTestCredencial(user, USER_ADMIN_LEVEL.admin.toString());
-			indexRep.save(postIndex);
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "true");
+
+			PostIndex pi = indexRep.findById(postId);		
+			indexRep.delete(pi);
+
+			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "editPost");
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Deletado com sucesso");
 			return "base";
 		}catch(Exception e) {
 			return "redirect:/login";
 		}
-	}
-
-	@GetMapping(value= "/addPost")
-	public String addPost() {
-		return "redirect:/";
 	}
 }

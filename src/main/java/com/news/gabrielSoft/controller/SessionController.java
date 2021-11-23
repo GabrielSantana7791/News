@@ -28,6 +28,7 @@ public class SessionController {
 			User user = login.userTestCredencial(RequisitionUser);
 			session.setAttribute("user", user);
 			session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
+			session.setAttribute("adminLevel", user.getUserLevel());
 			return "redirect:/";
 		} catch (Exception e) {
 			System.out.println(e);

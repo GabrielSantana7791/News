@@ -21,7 +21,6 @@ public class Login {
 		user = userRep.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 		
 		if(userLevel.equals(user.getUserLevel())) {
-			System.out.println(user.getUserLevel());
 			return user;
 		}
 		

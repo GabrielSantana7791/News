@@ -1,4 +1,4 @@
-package com.news.gabrielSoft.controller;
+package com.news.gabrielSoft.controller.post;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +21,6 @@ public class PostPageController {
 	public String postController(@PathVariable int postCode, Model model, HttpSession session) {
 		model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "index");
 		model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Início");
-		System.out.println(postCode);
 		PostIndex post = newsRep.findById(postCode);
 		
 		model.addAttribute(MODEL_ATTRIBUTES.section.toString(), post);

@@ -1,0 +1,18 @@
+<div class="container" th:fragment="section">
+	<div class="alert alert-success" role="alert"
+		th:if="${message}" th:text="${message}">Editado com sucesso</div>
+
+	<form action="/editPost" method="post" id="conteudo">
+		
+		<div th:if="${postContent != null}">
+		
+		<label>titulo</label> <input type="text" name="title" th:value="${postContent.getTitle()}"> <br>
+		<textarea rows="1" cols="1" name="text"  th:utext="${postContent.getText()}"></textarea>
+		<input type="date" name="date" th:value="${postContent.getDate()}"> <br>
+		<button type="submit">Postar</button>
+		
+		
+		</div>
+		
+	</form>
+</div>

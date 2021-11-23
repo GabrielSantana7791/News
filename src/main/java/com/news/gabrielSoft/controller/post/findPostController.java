@@ -1,4 +1,4 @@
-package com.news.gabrielSoft.controller;
+package com.news.gabrielSoft.controller.post;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,17 +15,15 @@ import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
 public class findPostController {
 	@Autowired
 	private PostIndexRepository postRep;
-	
+
 	@GetMapping(value="/find")
 	public String index2(String text, Model model, HttpSession session) {
 		model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "index");
 		model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Início");
+
+		PostIndex[] post = postRep.findByTextContaining(text);
 		
-		if(text != null) {
-			PostIndex[] post = postRep.findByTextContaining(text);
-			
-			model.addAttribute("section", post);
-		}
+		model.addAttribute("section", post);
 		
 		return "base";
 	}

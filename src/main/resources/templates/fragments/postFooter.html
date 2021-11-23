@@ -1,0 +1,20 @@
+<ul th:fragment="admin"
+	class="list-group list-group-horizontal"
+	th:if="${session.adminLevel} == 'admin'">
+
+	<li class="list-group-item">
+		<form action="/edit-post" method="get">
+			<button action="/edit-post" method="get" type="submit"
+				class="btn btn-warning" th:value="${PostIndex.id}" th:name="postId">Editar</button>
+		</form>
+	</li>
+
+	<li class="list-group-item"><form action="/deletePost" method="post">
+			<button type="submit" class="btn btn-danger"
+				th:value="${PostIndex.id}" th:name="postId">Deletar</button>
+		</form></li>
+
+
+
+
+</ul>

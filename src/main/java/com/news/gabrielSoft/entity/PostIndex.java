@@ -42,10 +42,8 @@ public class PostIndex{
 		return date;
 	}
 
-	public void setDate(String date) {
-	String d = " <h3 class=\"date\">" + date + "</h3>";
-		
-	this.date = d;
+	public void setDate(String date) {		
+	this.date = date;
 	}
 
 }

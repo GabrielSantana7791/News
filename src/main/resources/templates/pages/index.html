@@ -3,6 +3,8 @@
 		th:each="PostIndex: ${section}">
 		<a class="h3" href="#" th:href='@{/postCode/} + ${PostIndex.id}'
 			th:text="${PostIndex.title}"></a>
-		<p th:utext='${PostIndex.text} + ${PostIndex.date}'></p>
+		<p th:utext='${PostIndex.text}'></p>
+		<p class="h3" th:text="${PostIndex.date}">
+		<div th:replace="~{/fragments/postFooter :: ${session.userLevel}}"></div>
 	</div>
 </div>
