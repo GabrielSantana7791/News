@@ -1,5 +1,5 @@
 package com.news.gabrielSoft.entity;
 
-public class PostAboutMe{
+public class PostProjectsEntity{
 
 }

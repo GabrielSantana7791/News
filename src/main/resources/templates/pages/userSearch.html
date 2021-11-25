@@ -1,0 +1,15 @@
+<div class="container" th:fragment="section">
+	<div class="h3">Login</div>
+	
+	<form action="/userSearch" method="get" class="container-fluid">
+		<label>Usuario: </label> <input type="text" name="userName" required>
+		<button type="submit">Procurar</button>
+	</form>
+	
+	<div class="border border-secondary mb-3 bor"
+		th:each="user: ${user}">
+		<a class="h3" href="#" th:href='@{/user/} + ${user.getUserName}'
+			th:text=" ${user.getUserName}"></a>
+	</div>
+</div>
+

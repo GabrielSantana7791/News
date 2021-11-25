@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+<div class="container" th:fragment="section">
+	<div class="border border-secondary mb-3 bor">
+		<form th:if="${user != null}" method="post"
+			th:action="@{/editUser/} + ${user.getId}">
+			<label> User: </label> <input type="text"
+				th:value="${user.getUserName()}" name="userName"> <br>
+			<label> password: </label> <input type="text"
+				th:value="${user.getPassword()}" name="password"> <br>
+			<label> UserLevel: </label> <input type="text"
+				th:value="${user.getUserLevel()}" name="userLevel"> <br>
+			<button type="submit">Atualizar</button>
+		</form>
+		
+		<form action="/deleteUser" method="post">
+		<button type="submit" class="btn btn-danger"
+				th:value="${user.getId}" th:name="userId">Deletar</button>
+		</form>
+	</div>
+</div>

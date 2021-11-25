@@ -1,0 +1,96 @@
+package com.news.gabrielSoft.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.entity.UserEntity;
+import com.news.gabrielSoft.repository.CommentRepository;
+import com.news.gabrielSoft.repository.UserRepository;
+import com.news.gabrielSoft.user.Session;
+import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.util.User;
+
+@Controller
+public class UserPageController extends Page{
+	@Autowired
+	public UserRepository userRep;
+	
+	@Autowired
+	CommentRepository commentRep;
+	
+	@Autowired
+	Session session;
+	
+	@Autowired
+	User user;
+
+	@GetMapping(value="/user/{userName}")
+	public String postController(@PathVariable String userName, Model model, HttpSession httpSession) {
+		try {
+			pageFile = "userPage";
+			title = "userPage";
+			pageInitializer(model, httpSession);
+		} catch (Exception e) {
+			session.deslogar(httpSession);
+		
+			return "redirect:/login";
+		}
+		
+		UserEntity user = userRep.findByUserName(userName);	
+		model.addAttribute("user", user);//
+		
+		return "base";
+	}
+	
+	
+	@PostMapping(value="/editUser/{userId}")
+	public String editUser(Model model, HttpSession httpSession, @PathVariable int userId, UserEntity userEntity) {
+		try {
+			pageFile = "userPage";
+			title = "userPage";
+			pageInitializer(model, httpSession);
+		} catch (Exception e) {
+			session.deslogar(httpSession);
+			
+			return "redirect:/login";
+		}
+
+		UserEntity user = this.user.editUser(userId, userEntity);
+			
+		model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Editado com sucesso");
+		model.addAttribute(MODEL_ATTRIBUTES.user.toString(), user);
+		
+		return "base";
+	}
+	
+	@PostMapping(value="/deleteUser")
+	public String deleteUser (int userId, Model model, HttpSession httpSession) {
+		try {
+			session.userTestCredencial(httpSession);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/login";
+		}
+				
+		try {
+			user.deleteUser(userId);
+			pageFile = "userSearch";
+			title = "User Search";
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Usuario deletado com sucesso");
+			
+			pageInitializer(model, httpSession);
+			
+			return "base";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/";
+		}
+	}
+}

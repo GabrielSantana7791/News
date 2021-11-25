@@ -10,6 +10,11 @@
 	<nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark"
 		th:replace="~{fragments/navibar :: naviBar}"></nav>
 
+	<div class="container alert alert-success" role="alert"
+		th:if="${message}" th:text="${message}"></div>
+	<div class="container alert alert-danger" role="alert"
+		th:if="${errorMessage}" th:text="${errorMessage}"></div>
+		
 	<div class="container" th:replace="~{'pages/' + ${page} :: section }"></div>
 
 	<footer id="footer" th:replace="~{fragments/footer :: footer}"></footer>

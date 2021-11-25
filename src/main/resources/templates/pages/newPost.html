@@ -1,7 +1,4 @@
 <div class="container" th:fragment="section">
-	<div class="alert alert-success" role="alert"
-		th:if="${message == 'true'}">Publicado com sucesso</div>
-
 	<form action="/addPost" method="post" id="conteudo">
 		<label>Título</label> <input type="text" name="title"> <br>
 		<textarea rows="1" cols="1" name="text"></textarea>

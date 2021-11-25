@@ -6,56 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.news.gabrielSoft.entity.PostIndex;
-import com.news.gabrielSoft.entity.User;
-import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.user.Login;
+import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.entity.PostIndexEntity;
+import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.util.Post;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
-public class EditPostController {
+public class EditPostController extends Page{
 	@Autowired
-	private PostIndexRepository indexRep;
-
+	private Session login;
+	
 	@Autowired
-	private Login login;
+	private Post post;
 
 	@GetMapping(value= "/edit-post")
-	public String editPost(String postId, Model model, HttpSession session) {
+	public String editPost(int postId, Model model, HttpSession session) {
 		try {
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "editPost");
-			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Editar post");
-			User user = (User) session.getAttribute("user");
+			title = "Edit post";
+			pageFile = "editPost";
+			pageInitializer(model, session);
 			
-			PostIndex postIndex = indexRep.findById(Integer.parseInt(postId));
-			
+			PostIndexEntity postIndex = post.postIndex(postId);
+				
 			model.addAttribute("postContent", postIndex);
 			
-			
-
-			login.userTestCredencial(user, "admin");
 			return "base";
 		} catch (Exception e) {
-			System.out.println(e);
 			return "redirect:/login";
 		}
 	}
 
-	@PostMapping(value= "/editPost")
-	public String editPost(PostIndex postIndex, HttpSession session, Model model) {
+	@PostMapping(value= "/editPost/{postId}")
+	public String editPost(@PathVariable int postId, PostIndexEntity postIndex, HttpSession httpSession, Model model) {
 		try{
-			User user = (User) session.getAttribute("user");
-			login.userTestCredencial(user, USER_ADMIN_LEVEL.admin.toString());
+			login.userTestCredencial(httpSession, USER_ADMIN_LEVEL.admin);
 			
-			PostIndex postDB = indexRep.findByText(postIndex.getText());
-			postDB.setText(postIndex.getText());
-			postDB.setDate(postIndex.getDate());
-			postDB.setTitle(postIndex.getTitle());
-			
-			indexRep.flush();
+			PostIndexEntity postDB = post.editPost(httpSession, postId, postIndex);
 			
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "editPost");
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Editado com sucesso");
@@ -64,10 +55,5 @@ public class EditPostController {
 		}catch(Exception e) {
 			return "redirect:/login";
 		}
-	}
-
-	@GetMapping(value= "/editPost")
-	public String editPost() {
-		return "redirect:/";
 	}
 }

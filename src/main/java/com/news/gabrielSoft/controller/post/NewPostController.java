@@ -8,29 +8,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.news.gabrielSoft.entity.PostIndex;
-import com.news.gabrielSoft.entity.User;
-import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.user.Login;
+import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.entity.PostIndexEntity;
+import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.util.Post;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
-public class NewPostController {
+public class NewPostController extends Page{
 	@Autowired
-	private PostIndexRepository indexRep;
-
+	private Session session;
+	
 	@Autowired
-	private Login login;
+	Post post;
 
 	@GetMapping(value= "/novo-post")
-	public String newPage(Model model, HttpSession session) {
+	public String newPage(Model model, HttpSession httpSession) {
 		try {
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
-			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Adicionado com sucesso");
-			User user = (User) session.getAttribute("user");
-
-			login.userTestCredencial(user, "admin");
+			title = "Add new post";
+			pageFile = "newPost";
+			pageInitializer(model, httpSession);
+			
 			return "base";
 		} catch (Exception e) {
 			return "redirect:/login";
@@ -38,14 +37,14 @@ public class NewPostController {
 	}
 
 	@PostMapping(value= "/addPost")
-	public String addPost(PostIndex postIndex, HttpSession session, Model model) {
-		System.out.println( postIndex.getDate());
+	public String addPost(PostIndexEntity postIndex, HttpSession httpSession, Model model) {
 		try{
-			User user = (User) session.getAttribute("user");
-			login.userTestCredencial(user, USER_ADMIN_LEVEL.admin.toString());
-			indexRep.save(postIndex);
+			session.userTestCredencial(httpSession, USER_ADMIN_LEVEL.admin);
+			
+			post.addPost(postIndex);
+			
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "true");
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Postado com sucesso");
 			return "base";
 		}catch(Exception e) {
 			return "redirect:/login";
