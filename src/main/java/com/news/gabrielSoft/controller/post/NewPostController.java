@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Post;
+import com.news.gabrielSoft.classes.Session;
 import com.news.gabrielSoft.entity.PostIndexEntity;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.Post;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
 public class NewPostController extends Page{
 	@Autowired
-	private Session session;
+	public Session session;
 	
 	@Autowired
-	Post post;
+	public Post post;
 
 	@GetMapping(value= "/novo-post")
 	public String newPage(Model model, HttpSession httpSession) {

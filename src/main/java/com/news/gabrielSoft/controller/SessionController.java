@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Session;
 import com.news.gabrielSoft.entity.UserEntity;
 import com.news.gabrielSoft.repository.UserRepository;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
 
 @Controller

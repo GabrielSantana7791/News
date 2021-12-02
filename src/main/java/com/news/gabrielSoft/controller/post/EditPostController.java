@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Post;
+import com.news.gabrielSoft.classes.Session;
 import com.news.gabrielSoft.entity.PostIndexEntity;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.Post;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller

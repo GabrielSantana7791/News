@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.news.gabrielSoft.entity.UserEntity;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
 
 public abstract class Page {
@@ -26,7 +25,7 @@ public abstract class Page {
 		UserEntity user = (UserEntity) httpSession.getAttribute("user");
 
 		if(!user.equals(null)) {
-			session.userTestCredencial(user);
+			session.userTestCredencial(httpSession);
 
 		}
 	}

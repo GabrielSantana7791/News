@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.news.gabrielSoft.classes.Post;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.Post;
 
 @Controller
 public class DeletePostController {
@@ -31,7 +31,6 @@ public class DeletePostController {
 			return "base";
 			
 		}catch(Exception e) {
-			System.out.println(e);
 			return "redirect:/login";
 		}
 	}

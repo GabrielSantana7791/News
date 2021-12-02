@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Session;
+import com.news.gabrielSoft.classes.User;
 import com.news.gabrielSoft.entity.UserEntity;
 import com.news.gabrielSoft.repository.CommentRepository;
 import com.news.gabrielSoft.repository.UserRepository;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.User;
 
 @Controller
 public class UserPageController extends Page{
@@ -23,13 +23,13 @@ public class UserPageController extends Page{
 	public UserRepository userRep;
 	
 	@Autowired
-	CommentRepository commentRep;
+	public CommentRepository commentRep;
 	
 	@Autowired
-	Session session;
+	public Session session;
 	
 	@Autowired
-	User user;
+	public User user;
 
 	@GetMapping(value="/user/{userName}")
 	public String postController(@PathVariable String userName, Model model, HttpSession httpSession) {
@@ -43,7 +43,7 @@ public class UserPageController extends Page{
 			return "redirect:/login";
 		}
 		
-		UserEntity user = userRep.findByUserName(userName);	
+		UserEntity user = this.user.searchUser(userName);
 		model.addAttribute("user", user);//
 		
 		return "base";
@@ -73,23 +73,22 @@ public class UserPageController extends Page{
 	@PostMapping(value="/deleteUser")
 	public String deleteUser (int userId, Model model, HttpSession httpSession) {
 		try {
+			pageFile = "userSearch";
+			title = "User Search";
+			
 			session.userTestCredencial(httpSession);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "redirect:/login";
 		}
 				
 		try {
 			user.deleteUser(userId);
-			pageFile = "userSearch";
-			title = "User Search";
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Usuario deletado com sucesso");
 			
 			pageInitializer(model, httpSession);
 			
 			return "base";
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {	
 			return "redirect:/";
 		}
 	}

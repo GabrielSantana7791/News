@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.User;
 import com.news.gabrielSoft.entity.UserEntity;
 import com.news.gabrielSoft.repository.UserRepository;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.User;
 
 @Controller
 public class RegisterController extends Page{
 	@Autowired
-	UserRepository userRep;
+	public UserRepository userRep;
 	
 	@Autowired
-	User user;
+	public User user;
 
 	@GetMapping(value="/register")
 	public String Register(UserEntity user, Model model, HttpSession session) {
@@ -43,7 +43,7 @@ public class RegisterController extends Page{
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Registrado com sucesso");
 			
 		} catch (Exception e) {
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Usuário já existe");
+			model.addAttribute(MODEL_ATTRIBUTES.errorMessage.toString(), "Usuário já existe");
 			
 		}
 	

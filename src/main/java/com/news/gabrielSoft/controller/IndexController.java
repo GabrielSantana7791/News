@@ -26,7 +26,6 @@ public class IndexController extends Page {
 			title = "Index";
 			pageInitializer(model, session);
 		} catch (Exception e) {
-			session.invalidate();
 		}
 
 		List<PostIndexEntity> listPost = newsRep.findAll();

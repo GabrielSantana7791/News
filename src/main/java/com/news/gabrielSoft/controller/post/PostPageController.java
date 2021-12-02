@@ -11,27 +11,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Post;
 import com.news.gabrielSoft.entity.CommentEntity;
 import com.news.gabrielSoft.entity.PostIndexEntity;
 import com.news.gabrielSoft.repository.CommentRepository;
-import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.user.Session;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.Post;
 
 @Controller
-public class PostPageController extends Page{
+public class PostPageController extends Page{	
 	@Autowired
-	public PostIndexRepository newsRep;
+	public CommentRepository commentRep;
 	
 	@Autowired
-	CommentRepository commentRep;
-	
-	@Autowired
-	Post post;
-	
-	@Autowired
-	Session session;
+	public Post post;
 
 	@GetMapping(value="/postCode/{postCode}")
 	public String postController(@PathVariable int postCode, Model model, HttpSession httpSession) {
@@ -45,8 +37,6 @@ public class PostPageController extends Page{
 		
 		PostIndexEntity post = this.post.postIndex(postCode);
 		List<CommentEntity> comments = post.getComments();
-		
-		
 		
 		model.addAttribute("comments", comments);
 		model.addAttribute(MODEL_ATTRIBUTES.section.toString(), post);

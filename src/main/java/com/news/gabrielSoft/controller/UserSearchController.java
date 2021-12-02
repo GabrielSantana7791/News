@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.User;
 import com.news.gabrielSoft.entity.UserEntity;
 import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
-import com.news.gabrielSoft.util.User;
 
 @Controller
 public class UserSearchController extends Page{
 	@Autowired
-	User user;
+	public User user;
 	
 	@GetMapping(value="/userSearch")
 	public String postControllerr(String userName, Model model, HttpSession session) {

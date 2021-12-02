@@ -8,25 +8,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.news.gabrielSoft.classes.Comment;
 import com.news.gabrielSoft.entity.CommentEntity;
 import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.util.Comment;
 
 @Controller
-public class NewCommentController {
+public class CommentController {
 	//CRIAR CLASS
 	@Autowired
-	PostIndexRepository postRep;
+	public PostIndexRepository postRep;
 	
 	@Autowired
-	Comment comment;
+	public Comment comment;
 	
 	@PostMapping(value= "/newComment/{postId}")
 	public String AboutMe(Model model, HttpSession httpSession, @PathVariable("postId") String postId, CommentEntity commentEntity) {
 		try {
 			comment.newComment(httpSession, Integer.valueOf(postId), commentEntity);
 		} catch (Exception e) {
-			System.out.println(e);
 			return "redirect:/deslogar";
 		}
 		

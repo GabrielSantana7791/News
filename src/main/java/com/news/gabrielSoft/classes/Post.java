@@ -1,18 +1,16 @@
-package com.news.gabrielSoft.util;
+package com.news.gabrielSoft.classes;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.news.gabrielSoft.entity.CommentEntity;
 import com.news.gabrielSoft.entity.PostIndexEntity;
 import com.news.gabrielSoft.repository.CommentRepository;
 import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.user.Session;
+import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Service
 public class Post {
@@ -57,6 +55,11 @@ public class Post {
 	public PostIndexEntity postIndex (int postId) {
 		PostIndexEntity postIndex = postRep.findById(postId);	
 		return postIndex;
+	}
+	
+	
+	public PostIndexEntity[] findByTextContaining (String text){
+		return postRep.findByTextContaining(text);
 	}
 	
 }

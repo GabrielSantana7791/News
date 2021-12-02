@@ -8,13 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.news.gabrielSoft.classes.Page;
+import com.news.gabrielSoft.classes.Post;
 import com.news.gabrielSoft.entity.PostIndexEntity;
-import com.news.gabrielSoft.repository.PostIndexRepository;
 
 @Controller
 public class findPostController extends Page{
 	@Autowired
-	private PostIndexRepository postRep;
+	public Post post;
 
 	@GetMapping(value="/find")
 	public String index2(String text, Model model, HttpSession session) {
@@ -27,7 +27,7 @@ public class findPostController extends Page{
 			//ignore
 		}
 		
-		PostIndexEntity[] post = postRep.findByTextContaining(text);
+		PostIndexEntity[] post = this.post.findByTextContaining(text);
 		model.addAttribute("section", post);
 		
 		return "base";

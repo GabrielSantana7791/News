@@ -1,4 +1,4 @@
-package com.news.gabrielSoft.user;
+package com.news.gabrielSoft.classes;
 
 import javax.servlet.http.HttpSession;
 
