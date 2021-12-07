@@ -22,7 +22,7 @@ public class IndexController extends Page {
 	@GetMapping(value="/")
 	public String Index(Model model, HttpSession session) {
 		try {
-			pageFile = "index";
+			pageFile = "Index";
 			title = "Index";
 			pageInitializer(model, session);
 		} catch (Exception e) {

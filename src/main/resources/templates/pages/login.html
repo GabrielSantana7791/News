@@ -1,12 +1,14 @@
-<div class="container" th:fragment="section">
-	
-	<div class="alert alert-danger" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-	
+<div class="container my-4" th:fragment="section">
 	<div class="h3">Login</div>
-	
-	<form action="/login" method="post" class="container-fluid">
-		<label>Usuario: </label> <input type="text" name="userName" required> <label>password:
-		</label> <input type="password" name="password" required>
-		<button type="submit">Logar</button>
+	<form action="/login" method="post">
+		<div class="row mb-3">
+			<label class="col-2">User name: </label>
+			<input class="col-2" type="text" name="userName" required> 
+		</div>
+		<div class="row mb-3">
+			<label class="col-2">Password:</label> 
+			<input class="col-2" type="password" name="password" required>
+		</div>
+		<button type="submit">Log-in</button>
 	</form>
 </div>

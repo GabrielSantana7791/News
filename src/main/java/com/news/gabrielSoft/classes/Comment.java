@@ -23,17 +23,18 @@ public class Comment {
 	PostIndexRepository postRep;
 
 	public void newComment(HttpSession httpSession, int postId, CommentEntity comment) throws Exception {
-		PostIndexEntity postIndex = postRep.findById(postId);
-		UserEntity user = (UserEntity) httpSession.getAttribute("user");
-		user = login.userTestCredencial(httpSession);
-		
-		comment.setUser(user);
-		comment.setPostIndex(postIndex);
-		commentRep.saveAndFlush(comment);
-		
-		postIndex.AddNewComment(comment);
+		if(comment.getText().length() != 0) {
+			PostIndexEntity postIndex = postRep.findById(postId);
+			UserEntity user = (UserEntity) httpSession.getAttribute("user");
+			user = login.userTestCredencial(httpSession);
+			
+			comment.setUser(user);
+			comment.setPostIndex(postIndex);
+			commentRep.saveAndFlush(comment);
+			
+			postIndex.AddNewComment(comment);
 
-		postRep.saveAndFlush(postIndex);
-	
+			postRep.saveAndFlush(postIndex);
+		}
 	}
 }

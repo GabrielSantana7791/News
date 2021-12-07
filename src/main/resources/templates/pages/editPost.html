@@ -1,19 +1,14 @@
 <div class="container" th:fragment="section">
 	<form th:action="@{/editPost/} + ${postContent.getId}" method="post"
 		id="conteudo">
-
-		<div th:if="${postContent != null}">
-
-			<label>titulo</label> <input type="text" name="title"
+		<div class="container" th:if="${postContent != null}">
+			<label>Title</label> <input required="required" type="text" name="title"
 				th:value="${postContent.getTitle()}"> <br>
-			<textarea rows="1" cols="1" name="text"
+			<textarea required rows="1" cols="1" name="text"
 				th:utext="${postContent.getText()}"></textarea>
-			<input type="date" name="date" th:value="${postContent.getDate()}">
+			<input required type="date" name="date" th:value="${postContent.getDate()}">
 			<br>
-			<button type="submit">Postar</button>
-
-
+			<button type="submit">Post</button>
 		</div>
-
 	</form>
 </div>

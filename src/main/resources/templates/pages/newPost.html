@@ -1,8 +1,8 @@
 <div class="container" th:fragment="section">
 	<form action="/addPost" method="post" id="conteudo">
-		<label>Título</label> <input type="text" name="title"> <br>
-		<textarea rows="1" cols="1" name="text"></textarea>
-		<input type="date" name="date"> <br>
-		<button type="submit">Postar</button>
+		<label>Title</label> <input required type="text" name="title"> <br>
+		<textarea required rows="1" cols="1" name="text"></textarea>
+		<input required type="date" name="date"> <br>
+		<button type="submit">New post</button>
 	</form>
 </div>

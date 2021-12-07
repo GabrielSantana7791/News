@@ -1,5 +1,6 @@
 package com.news.gabrielSoft.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class CommentEntity {
 	@JoinColumn(name="postIndex_id")
 	PostIndexEntity postIndex;
 	
+	@Column(length = 3000)
 	String text;
 
 	public int getId() {
@@ -62,7 +64,5 @@ public class CommentEntity {
 	public String toString() {
 		return "CommentEntity [id=" + id + ", user=" + user + ", postIndex=" + postIndex + ", text=" + text + "]";
 	}
-	
-	
 	
 }

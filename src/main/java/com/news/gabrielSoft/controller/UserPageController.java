@@ -70,6 +70,12 @@ public class UserPageController extends Page{
 		return "base";
 	}
 	
+	@GetMapping(value="/editUser/{userId}")
+	public String teaste(@PathVariable int userId) {
+		
+		return "redirect:/userSearch";
+	}
+	
 	@PostMapping(value="/deleteUser")
 	public String deleteUser (int userId, Model model, HttpSession httpSession) {
 		try {

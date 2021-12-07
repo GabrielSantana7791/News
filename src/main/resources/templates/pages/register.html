@@ -1,9 +1,14 @@
-<meta charset="UTF-8">
-<div class="container" th:fragment="section">
+<div class="container my-4" th:fragment="section">
+<div class="h3">Register</div>
 	<form action="/register" method="post">
-		<label>Nome usuário:</label> <input type="text" name="userName">
-		<br> <label>Senha:</label> <input type="password" name="password">
-		<br>
-		<button type="submit">Registrar</button>
+		<div class="row  mb-3">
+			<label class="col-2">User name:</label>
+			<input class="col-2" required type="text" name="userName">
+		</div>
+		<div class="row  mb-3">
+			<label class="col-2">Password:</label> 
+			<input class="col-2" required type="password" name="password">
+		</div>
+		<button type="submit">Register</button>
 	</form>
 </div>

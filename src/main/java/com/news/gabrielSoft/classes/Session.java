@@ -45,12 +45,16 @@ public class Session {
 		throw new Exception("Usuário nsão existe");
 	}
 	
-	public void login(HttpSession session, UserEntity user) throws Exception {
-		user = userTestCredencial(user);
-		session.setAttribute("user", user);
-		session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
-		session.setAttribute("adminLevel", user.getUserLevel());
+	public void login(HttpSession session, UserEntity userEntity) throws Exception {
+		UserEntity user = userTestCredencial(userEntity);
 		
+		if(userEntity.getUserName().equals(user.getUserName()) && userEntity.getPassword().equals(user.getPassword())) {
+			session.setAttribute("user", user);
+			session.setAttribute("userNavbar", "userNavbar/" + user.getUserLevel());
+			session.setAttribute("adminLevel", user.getUserLevel());
+		}else {
+			throw new Exception("User not found");
+		}
 	}
 	
 	public void deslogar(HttpSession httpSession) {
