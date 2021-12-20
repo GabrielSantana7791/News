@@ -6,7 +6,7 @@ your comments. You can also manage the level of the users.
 
 1- How to install: <br/>
 1.1 Maven:  https://www.javatpoint.com/how-to-install-maven <br />
-1.2 To compile the project: Just open the console on the news folder and type "mvn compile"
+1.2 To compile the project: Just open the console on the news folder and type "mvn compile" <br />
 1.3 To execute: After the compile processes are done, open the console on the news folder and type "mvn spring-boot:run" (before it, make sure the news database exists). <br />
 News is running on http://localhost:8080.
 
@@ -18,7 +18,7 @@ are only 2 options: user (default) or admin. <br />
 2.2- admin: Can write a new post through the menu "add post" at the navbar, edit and delete posts (theses options
 are in the bottom of the post) and the admin can edit or remove a use (User Find from the navbar). <br />
 
-3- Search post: A simple engine that find out a post containing the specific text writed.
+3- Search post: A simple engine that find out a post containing the specific text writed. <br />
 
 4- User Find: The same as the Search Post, only find a user containing the specific text writed. <br />
 
