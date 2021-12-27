@@ -27,7 +27,7 @@ public class DeletePostController {
 			post.deletePost(session, postId);
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
 			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Delete post");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Post deletado com sucesso");
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 			return "base";
 			
 		}catch(Exception e) {

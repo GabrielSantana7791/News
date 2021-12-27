@@ -64,7 +64,7 @@ public class UserPageController extends Page{
 
 		UserEntity user = this.user.editUser(userId, userEntity);
 			
-		model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Editado com sucesso");
+		model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 		model.addAttribute(MODEL_ATTRIBUTES.user.toString(), user);
 		
 		return "base";
@@ -89,7 +89,7 @@ public class UserPageController extends Page{
 				
 		try {
 			user.deleteUser(userId);
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Usuario deletado com sucesso");
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 			
 			pageInitializer(model, httpSession);
 			

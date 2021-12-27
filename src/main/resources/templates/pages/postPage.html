@@ -16,16 +16,13 @@
 		</form>
 
 		<form action="/login" method="get" th:unless="${session.user != null}">
-			<button type="submit">You need to login to comment</button>
+			<button type="submit">You need to login to send a comment</button>
 		</form>
 
 		<div class="border border-secondary bg-light mx-1 my-3 col-7"
 			th:if="${comments} != null" th:each="Comment: ${comments}">
 		<label th:text="${Comment.getUser.getUserName()} + @{:}"></label>
-		<p class="col-1" th:text="${Comment.getText()}"></p>
-
-
-
+		<p th:text="${Comment.getText()}"></p>
 		</div>
 
 	</div>

@@ -49,7 +49,7 @@ public class EditPostController extends Page{
 			PostIndexEntity postDB = post.editPost(httpSession, postId, postIndex);
 			
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "editPost");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Editado com sucesso");
+			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 			model.addAttribute("postContent", postDB);
 			return "base";
 		}catch(Exception e) {

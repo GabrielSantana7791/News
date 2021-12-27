@@ -1,34 +1,33 @@
 <meta charset="UTF-8">
 <div class="container" th:fragment="section">
 	<div class="border border-secondary mb-3 bor">
-		<form class="container" th:if="${user != null}" method="post"
-			th:action="@{/editUser/} + ${user.getId}">
-			<div class="row my-3">
-				<label class="col-1"> User: </label> 
-				<input class="col-2" type="text"
-					th:value="${user.getUserName()}" name="userName">
-			</div>
-			<div class="row my-3">
-			<label class="col-1"> password: </label>
-				<input class="col-2" type="text"
-					th:value="${user.getPassword()}" name="password">
-			</div>
-			<div class="row my-3">
-				<label class="col-1"> UserLevel: </label>
-				<input th:checked="${user.getUserLevel == 'user'}" class="col-auto" type="radio" value="user"
-					 name="userLevel">
-				<label class="col-1">Default</label>
-				<input th:checked="${user.getUserLevel == 'admin'}" class="col-auto" type="radio" value="admin"
-					 name="userLevel">
-				<label class="col-1">Admin</label>
-			</div>
-			<div>
-				<button class="btn btn-info" type="submit">Update</button>
-				<form action="/deleteUser" method="post">
-					<button type="submit" class="btn btn-danger"
-						th:value="${user.getId}" th:name="userId">Delete</button>
-				</form>
-			</div>
-		</form>
+		<div class="container">
+			<form th:if="${user != null}" method="post"
+				th:action="@{/editUser/} + ${user.getId}">
+				<div class="row my-3">
+					<label class="col-1"> User: </label> <input class="col-2"
+						type="text" th:value="${user.getUserName()}" name="userName">
+				</div>
+				<div class="row my-3">
+					<label class="col-1"> password: </label> <input class="col-2"
+						type="text" th:value="${user.getPassword()}" name="password">
+				</div>
+				<div class="row my-3">
+					<label class="col-1"> UserLevel: </label> <input
+						th:checked="${user.getUserLevel == 'user'}" class="col-auto"
+						type="radio" value="user" name="userLevel"> <label
+						class="col-1">Default</label> <input
+						th:checked="${user.getUserLevel == 'admin'}" class="col-auto"
+						type="radio" value="admin" name="userLevel"> <label
+						class="col-1">Admin</label>
+				</div>
+				<button class="btn btn-info col-auto" type="submit">Update</button>
+			</form>
+
+			<form action="/deleteUser" method="post">
+				<button type="submit" class="btn btn-danger"
+					th:value="${user.getId}" th:name="userId">Delete</button>
+			</form>
+		</div>
 	</div>
 </div>
