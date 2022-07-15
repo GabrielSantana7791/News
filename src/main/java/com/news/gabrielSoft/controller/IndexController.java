@@ -22,8 +22,8 @@ public class IndexController extends Page {
 	@GetMapping(value="/")
 	public String Index(Model model, HttpSession session) {
 		try {
-			pageFile = "Index";
-			title = "Index";
+			pageFile = "index";
+			title = "index";
 			pageInitializer(model, session);
 		} catch (Exception e) {
 		}

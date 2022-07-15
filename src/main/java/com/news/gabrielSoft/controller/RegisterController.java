@@ -25,7 +25,7 @@ public class RegisterController extends Page{
 	@GetMapping(value="/register")
 	public String Register(UserEntity user, Model model, HttpSession session) {
 		try {
-			pageFile = "Register";
+			pageFile = "register";
 			title = "Register";
 			pageInitializer(model, session);//
 		} catch (Exception e) {

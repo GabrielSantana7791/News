@@ -27,7 +27,7 @@ public class NewPostController extends Page{
 	public String newPage(Model model, HttpSession httpSession) {
 		try {
 			title = "Add new post";
-			pageFile = "newPost";
+			pageFile = "new-post";
 			pageInitializer(model, httpSession);
 			
 			return "base";
@@ -43,7 +43,7 @@ public class NewPostController extends Page{
 			
 			post.addPost(postIndex);
 			
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "newPost");
+			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "new-post");
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Postado com sucesso");
 			return "base";
 		}catch(Exception e) {

@@ -29,7 +29,7 @@ public class PostPageController extends Page{
 	public String postController(@PathVariable int postCode, Model model, HttpSession httpSession) {
 		try {
 			title = "Post";
-			pageFile = "postPage";
+			pageFile = "post-page";
 			pageInitializer(model, httpSession);
 		} catch (Exception e) {
 			//ignore

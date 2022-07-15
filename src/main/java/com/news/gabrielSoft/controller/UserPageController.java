@@ -34,7 +34,7 @@ public class UserPageController extends Page{
 	@GetMapping(value="/user/{userName}")
 	public String postController(@PathVariable String userName, Model model, HttpSession httpSession) {
 		try {
-			pageFile = "userPage";
+			pageFile = "user-page";
 			title = "userPage";
 			pageInitializer(model, httpSession);
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class UserPageController extends Page{
 	@PostMapping(value="/editUser/{userId}")
 	public String editUser(Model model, HttpSession httpSession, @PathVariable int userId, UserEntity userEntity) {
 		try {
-			pageFile = "userPage";
+			pageFile = "user-page";
 			title = "userPage";
 			pageInitializer(model, httpSession);
 		} catch (Exception e) {

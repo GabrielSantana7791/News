@@ -6,7 +6,7 @@
 			th:text="${PostIndex.title}"></a>
 		<p th:utext='${PostIndex.text}'></p>
 		<p class="h3" th:text="${PostIndex.date}">
-		<div th:replace="~{/fragments/postFooter :: ${session.userLevel}}"></div>
+		<div th:replace="~{/fragments/post-footer :: ${session.userLevel}}"></div>
 
 		<form th:if="${session.user != null}"
 			th:action="@{/newComment/} + ${PostIndex.id}"

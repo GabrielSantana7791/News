@@ -28,7 +28,7 @@ public class EditPostController extends Page{
 	public String editPost(int postId, Model model, HttpSession session) {
 		try {
 			title = "Edit post";
-			pageFile = "editPost";
+			pageFile = "edit-post";
 			pageInitializer(model, session);
 			
 			PostIndexEntity postIndex = post.postIndex(postId);
@@ -48,7 +48,7 @@ public class EditPostController extends Page{
 			
 			PostIndexEntity postDB = post.editPost(httpSession, postId, postIndex);
 			
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "editPost");
+			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "edit-post");
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 			model.addAttribute("postContent", postDB);
 			return "base";

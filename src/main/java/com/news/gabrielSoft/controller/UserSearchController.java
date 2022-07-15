@@ -20,7 +20,7 @@ public class UserSearchController extends Page{
 	@GetMapping(value="/userSearch")
 	public String postControllerr(String userName, Model model, HttpSession session) {
 		try {
-			pageFile = "userSearch";
+			pageFile = "user-search";
 			title = "user Search";
 			pageInitializer(model, session);
 		} catch (Exception e) {
