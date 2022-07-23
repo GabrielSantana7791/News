@@ -1,5 +1,8 @@
 package com.news.gabrielSoft.controller.post;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +45,24 @@ public class EditPostController extends Page{
 	}
 
 	@PostMapping(value= "/editPost/{postId}")
-	public String editPost(@PathVariable int postId, PostIndexEntity postIndex, HttpSession httpSession, Model model) {
+	public String editPost(@PathVariable int postId, String dateStr, PostIndexEntity postIndex, HttpSession httpSession, Model model) {
 		try{
 			login.userTestCredencial(httpSession, USER_ADMIN_LEVEL.admin);
+			
+			dateStr = dateStr.replace('-', '/');
+			Date date = new SimpleDateFormat("yyyy/MM/dd").parse(dateStr);
+			
+			postIndex.setDate(date);
 			
 			PostIndexEntity postDB = post.editPost(httpSession, postId, postIndex);
 			
 			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "edit-post");
 			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
 			model.addAttribute("postContent", postDB);
+
 			return "base";
 		}catch(Exception e) {
+			System.out.println(e);
 			return "redirect:/login";
 		}
 	}

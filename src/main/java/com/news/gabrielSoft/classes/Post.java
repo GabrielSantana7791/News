@@ -41,7 +41,6 @@ public class Post {
 		postDB.setText(postIndex.getText());
 		postDB.setDate(postIndex.getDate());
 		postDB.setTitle(postIndex.getTitle());
-		
 		postRep.flush();
 		
 		return postDB;

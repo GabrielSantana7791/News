@@ -29,6 +29,7 @@ public class IndexController extends Page {
 		}
 
 		List<PostIndexEntity> listPost = newsRep.findAll();
+		//listPost.get(0).getDate().;
 		model.addAttribute(MODEL_ATTRIBUTES.section.toString(), listPost);
 		
 		return "base";

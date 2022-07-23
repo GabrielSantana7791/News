@@ -1,11 +1,12 @@
 package com.news.gabrielSoft.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +28,13 @@ public class PostIndexEntity{
 	@Column(length = 3000)
 	private String text;
 	private String title;
-	private String date; //alterar	
+	private Date date; //alterar	
+	
+	public String dateString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		
+		return sdf.format(date);
+	}
 	
 	public int getId() {
 		return id;
@@ -53,11 +60,11 @@ public class PostIndexEntity{
 		this.title = title;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {		
+	public void setDate(Date date) {		
 	this.date = date;
 	}
 

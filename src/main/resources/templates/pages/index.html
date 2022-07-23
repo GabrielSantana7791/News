@@ -4,7 +4,7 @@
 		<a class="h3" href="#" th:href='@{/postCode/} + ${PostIndex.id}'
 			th:text="${PostIndex.title}"></a>
 		<p th:utext='${PostIndex.text}'></p>
-		<p class="h3" th:text="${PostIndex.date}">
+		<p align="end" class="h3" th:text="${PostIndex.dateString()}">
 		<div th:replace="~{fragments/post-footer :: ${session.userLevel}}"></div>
 	</div>
 </div>
