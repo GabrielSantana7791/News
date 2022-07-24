@@ -13,4 +13,6 @@ public interface PostIndexRepository  extends JpaRepository<PostIndexEntity, Lon
 	PostIndexEntity findById(int id);
 	PostIndexEntity[] findByTextContaining(String text);
 	PostIndexEntity[] findByTitleContaining(String title);
+	PostIndexEntity[] findTop3ByOrderByViewNumberDesc();
+	
 }

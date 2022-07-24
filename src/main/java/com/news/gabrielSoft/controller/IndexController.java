@@ -29,7 +29,11 @@ public class IndexController extends Page {
 		}
 
 		List<PostIndexEntity> listPost = newsRep.findAll();
-		//listPost.get(0).getDate().;
+		
+		PostIndexEntity[] listPost2 = newsRep.findTop3ByOrderByViewNumberDesc();
+		
+		model.addAttribute("top3", listPost2);
+		
 		model.addAttribute(MODEL_ATTRIBUTES.section.toString(), listPost);
 		
 		return "base";

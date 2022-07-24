@@ -1,7 +1,5 @@
 package com.news.gabrielSoft.classes;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +39,8 @@ public class Post {
 		postDB.setText(postIndex.getText());
 		postDB.setDate(postIndex.getDate());
 		postDB.setTitle(postIndex.getTitle());
+		postDB.setSummary(postIndex.getSummary());
+		postDB.setImgURL(postIndex.getImgURL());
 		postRep.flush();
 		
 		return postDB;
@@ -59,6 +59,14 @@ public class Post {
 	
 	public PostIndexEntity[] findByTextContaining (String text){
 		return postRep.findByTextContaining(text);
+	}
+	
+	public void addViewNumber(int postId) {
+		PostIndexEntity postIndex = postRep.findById(postId);
+		postIndex.setViewNumber(postIndex.getViewNumber() + 1);
+		
+		postRep.flush();
+		
 	}
 	
 }

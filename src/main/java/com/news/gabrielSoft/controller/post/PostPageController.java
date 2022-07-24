@@ -36,6 +36,7 @@ public class PostPageController extends Page{
 		}
 		
 		PostIndexEntity post = this.post.postIndex(postCode);
+		this.post.addViewNumber(postCode);
 		List<CommentEntity> comments = post.getComments();
 		
 		model.addAttribute("comments", comments);

@@ -28,7 +28,10 @@ public class PostIndexEntity{
 	@Column(length = 3000)
 	private String text;
 	private String title;
+	private String summary;
+	private String imgURL;
 	private Date date; //alterar	
+	private int viewNumber;
 	
 	public String dateString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -87,6 +90,30 @@ public class PostIndexEntity{
 	
 	public void deleteComment() {
 		commentsEntity = null;
+	}
+
+	public int getViewNumber() {
+		return viewNumber;
+	}
+
+	public void setViewNumber(int viewNumber) {
+		this.viewNumber = viewNumber;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getImgURL() {
+		return imgURL;
+	}
+
+	public void setImgURL(String imgURL) {
+		this.imgURL = imgURL;
 	}
 
 }

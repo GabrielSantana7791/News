@@ -7,6 +7,8 @@
 			<textarea required rows="1" cols="1" name="text"
 				th:utext="${postContent.getText()}"></textarea>
 			<input required type="date" name="dateStr" th:value="${postContent.getDate()}">
+			<input required type="text" name="summary" th:value="${postContent.getSummary}" placeholder="Summary">
+			<input required type="text" name="imgURL" th:value="${postContent.getImgURL()}" placeholder="Image's URL">
 			<br>
 			<button class="btn btn-primary" type="submit">Post</button>
 		</div>
