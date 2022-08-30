@@ -20,7 +20,7 @@ public class findPostController extends Page{
 	public String index2(String text, Model model, HttpSession session) {
 		try {
 			title = "Find post";
-			pageFile = "index";
+			pageFile = "index2";
 			pageInitializer(model, session);
 			
 		} catch (Exception e) {

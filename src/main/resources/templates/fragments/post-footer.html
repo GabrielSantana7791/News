@@ -4,14 +4,14 @@
 	<li class="list-group-item">
 		<form action="/edit-post" method="get">
 			<button action="/edit-post" method="get" type="submit"
-				class="btn btn-warning" th:value="${PostIndex.id}" th:name="postId">Edit</button>
+				class="btn btn-warning" th:value="${section.id}" th:name="postId">Edit</button>
 		</form>
 	</li>
 
 	<li class="list-group-item">
 		<form action="/deletePost" method="post">
 			<button type="submit" class="btn btn-danger" 
-			th:value="${PostIndex.id}" th:name="postId">Delete</button>
+			th:value="${section.id}" th:name="postId">Delete</button>
 		</form>
 	</li>
 

@@ -1,0 +1,19 @@
+<div class="container" th:fragment="section">
+	<div class="row album py-5 justify-content-center" align="center">
+		<div>
+			<h4>Results</h4>
+		</div>
+		<div class="col-auto" th:each="PostIndex: ${section}">
+			<div class="card mb-4 box-shadow">
+				<img class="card-img-top" th:src="${PostIndex.imgURL}" width="200"
+					height="200">
+				<div class="card-body">
+					<a th:href="@{postCode/} + ${PostIndex.id}" class="h6"
+						th:text="${PostIndex.title}"></a>
+					<p th:text="${PostIndex.summary}"></p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

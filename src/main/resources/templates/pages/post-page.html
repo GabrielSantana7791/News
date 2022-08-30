@@ -1,29 +1,31 @@
 <meta charset="UTF-8">
 <div class="container" th:fragment="section">
-	<div class="border border-secondary my-3 bor"
+	<div class="border-bottom border-secondary my-3 pb-5"
 		th:each="PostIndex: ${section}">
 		<a class="h3" href="#" th:href='@{/postCode/} + ${PostIndex.id}'
 			th:text="${PostIndex.title}"></a>
 		<p th:utext='${PostIndex.text}'></p>
-		<p align="end" class="h3" th:text="${PostIndex.dateString()}">
+		<p align="start" class="h6 py-2" th:text="${PostIndex.dateString()}"></p>
+	</div>
+
+	<div class="py-3">
 		<div th:replace="~{fragments/post-footer :: ${session.userLevel}}"></div>
 
 		<form th:if="${session.user != null}"
-			th:action="@{/newComment/} + ${PostIndex.id}"
-			method="post">
+			th:action="@{/newComment/} + ${section.id}" method="post">
 			<input required type="text" name="text">
 			<button class="btn btn-dark" type="submit" th:value="${session.user}">Send</button>
 		</form>
 
 		<form action="/login" method="get" th:unless="${session.user != null}">
-			<button class="btn btn-dark" type="submit">You need to login to send a comment</button>
+			<button class="btn btn-dark" type="submit">You need to login
+				to send a comment</button>
 		</form>
 
-		<div class="border border-secondary bg-light mx-1 my-3 col-7"
+		<div class="border border-secondary bg-light mx-1 my-3 col-7 p-1" style="border-radius:20px;"
 			th:if="${comments} != null" th:each="Comment: ${comments}">
-		<label th:text="${Comment.getUser.getUserName()} + @{:}"></label>
-		<p th:text="${Comment.getText()}"></p>
+			<label th:text="${Comment.getUser.getUserName()} + @{:}"></label>
+			<p th:text="${Comment.getText()}"></p>
 		</div>
-
 	</div>
 </div>
