@@ -27,7 +27,6 @@ public class PostPageController extends Page{
 
 	@GetMapping(value="/postCode/{postCode}")
 	public String postController(@PathVariable int postCode, Model model, HttpSession httpSession) {
-		System.out.println(postCode + "\n \n \n \n \n \n __________________________");
 		try {
 			title = "Post";
 			pageFile = "post-page";

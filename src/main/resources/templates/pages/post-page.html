@@ -18,8 +18,8 @@
 		</form>
 
 		<form action="/login" method="get" th:unless="${session.user != null}">
-			<button class="btn btn-dark" type="submit">You need to login
-				to send a comment</button>
+			<button class="btn btn-dark" type="submit">You must log-in
+				to post a comment</button>
 		</form>
 
 		<div class="border border-secondary bg-light mx-1 my-3 col-7 p-1" style="border-radius:20px;"
