@@ -11,7 +11,7 @@
 					<img class="card-img-top" th:src="${top3[0].imgURL}" width="200"
 						height="200">
 					<div class="card-body">
-						<a th:href="@{postCode/} + ${top3[0].id}" class="h6"
+						<a th:href="'postCode/' + ${top3[0].id}" class="h6"
 							th:text="${top3[0].title}"></a>
 						<p th:text="${top3[0].summary}"></p>
 						<p th:text="@{Visualizações:} + ' ' + ${top3[0].viewNumber}"></p>
