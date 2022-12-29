@@ -4,34 +4,34 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.news.gabrielSoft.classes.Post;
-import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.models.post.DeletePostModel;
+import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
 public class DeletePostController {
 	@Autowired
-	private Post post;
+	private DeletePostModel deletePostModel;
 	
-	@GetMapping(value= "/deletePost")
-	public String deletePost() {
-		return "redirect:/";
-	}
-
 	@PostMapping(value= "/deletePost")
-	public String deletePost(int postId, HttpSession session, Model model) {
-		try{
-			post.deletePost(session, postId);
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "new-post");
-			model.addAttribute(MODEL_ATTRIBUTES.title.toString(), "Delete post");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
-			return "base";
+	public ModelAndView deletePost(int postId, HttpSession httpSession) {
+		deletePostModel.setBaseContent(httpSession);
+		ModelAndView mav = deletePostModel.getModelAndView();
+		
+		boolean isUser = deletePostModel.testCredencials(httpSession, USER_ADMIN_LEVEL.admin.toString());
+		
+		if(isUser == false) {
+			mav.clear();
+			mav.setViewName("redirect:/login");
+		}else {
+			deletePostModel.deletePost(postId);
 			
-		}catch(Exception e) {
-			return "redirect:/login";
+			mav.clear();
+			mav.setViewName("redirect:/");
 		}
+		
+		return mav;
 	}
 }

@@ -1,14 +1,11 @@
 package com.news.gabrielSoft.classes;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.news.gabrielSoft.entity.PostIndexEntity;
 import com.news.gabrielSoft.repository.CommentRepository;
 import com.news.gabrielSoft.repository.PostIndexRepository;
-import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Service
 public class Post {
@@ -22,18 +19,13 @@ public class Post {
 	@Autowired
 	CommentRepository commentRep;
 
-	public void deletePost(HttpSession httpSession, int postId) throws Exception {	
-		session.userTestCredencial(httpSession, USER_ADMIN_LEVEL.admin);
-		
+	public void deletePost(int postId){	
 		PostIndexEntity post = postRep.findById(postId);
 		
-		postRep.delete(post);
-				
+		postRep.delete(post);		
 	}
 	
-	public PostIndexEntity editPost(HttpSession httpSession, int postId, PostIndexEntity postIndex) throws Exception {
-		session.userTestCredencial(httpSession);
-		
+	public PostIndexEntity editPost(int postId, PostIndexEntity postIndex){		
 		PostIndexEntity postDB = postRep.findById(postId);
 
 		postDB.setText(postIndex.getText());
@@ -67,6 +59,5 @@ public class Post {
 		
 		postRep.flush();
 		
-	}
-	
+	}	
 }

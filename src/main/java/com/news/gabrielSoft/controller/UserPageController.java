@@ -4,98 +4,33 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.news.gabrielSoft.classes.Page;
-import com.news.gabrielSoft.classes.Session;
-import com.news.gabrielSoft.classes.User;
-import com.news.gabrielSoft.entity.UserEntity;
-import com.news.gabrielSoft.repository.CommentRepository;
-import com.news.gabrielSoft.repository.UserRepository;
-import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.models.userSearch.UserPageModel;
+import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
-public class UserPageController extends Page{
+public class UserPageController{
 	@Autowired
-	public UserRepository userRep;
-	
-	@Autowired
-	public CommentRepository commentRep;
-	
-	@Autowired
-	public Session session;
-	
-	@Autowired
-	public User user;
+	public UserPageModel userPageModel;
 
 	@GetMapping(value="/user/{userName}")
-	public String postController(@PathVariable String userName, Model model, HttpSession httpSession) {
-		try {
-			pageFile = "user-page";
-			title = "userPage";
-			pageInitializer(model, httpSession);
-		} catch (Exception e) {
-			session.deslogar(httpSession);
+	public ModelAndView userPage(@PathVariable String userName, HttpSession httpSession) {		
+		userPageModel.setBaseContent(httpSession);
+		ModelAndView mav = userPageModel.getModelAndView();
 		
-			return "redirect:/login";
+		boolean isUser = userPageModel.testCredencials(httpSession, USER_ADMIN_LEVEL.admin.toString());
+		
+		if(isUser == false) {
+			mav.clear();
+			mav.setViewName("redirect:/login");
 		}
-		
-		UserEntity user = this.user.searchUser(userName);
-		model.addAttribute("user", user);//
-		
-		return "base";
-	}
-	
-	
-	@PostMapping(value="/editUser/{userId}")
-	public String editUser(Model model, HttpSession httpSession, @PathVariable int userId, UserEntity userEntity) {
-		try {
-			pageFile = "user-page";
-			title = "userPage";
-			pageInitializer(model, httpSession);
-		} catch (Exception e) {
-			session.deslogar(httpSession);
-			
-			return "redirect:/login";
+		else {
+			userPageModel.searchUser(userName);
 		}
-
-		UserEntity user = this.user.editUser(userId, userEntity);
 			
-		model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
-		model.addAttribute(MODEL_ATTRIBUTES.user.toString(), user);
-		
-		return "base";
-	}
-	
-	@GetMapping(value="/editUser/{userId}")
-	public String teaste(@PathVariable int userId) {
-		
-		return "redirect:/userSearch";
-	}
-	
-	@PostMapping(value="/deleteUser")
-	public String deleteUser (int userId, Model model, HttpSession httpSession) {
-		try {
-			pageFile = "userSearch";
-			title = "User Search";
-			
-			session.userTestCredencial(httpSession);
-		} catch (Exception e) {
-			return "redirect:/login";
-		}
-				
-		try {
-			user.deleteUser(userId);
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
-			
-			pageInitializer(model, httpSession);
-			
-			return "base";
-		} catch (Exception e) {	
-			return "redirect:/";
-		}
+		return mav;
 	}
 }

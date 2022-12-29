@@ -1,5 +1,6 @@
 package com.news.gabrielSoft.controller.post;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,59 +12,69 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.news.gabrielSoft.classes.Page;
-import com.news.gabrielSoft.classes.Post;
-import com.news.gabrielSoft.classes.Session;
 import com.news.gabrielSoft.entity.PostIndexEntity;
-import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.models.post.EditPostModel;
 import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
-public class EditPostController extends Page{
+public class EditPostController{
 	@Autowired
-	private Session login;
-	
-	@Autowired
-	private Post post;
+	private EditPostModel editPostModel;
 
 	@GetMapping(value= "/edit-post")
-	public String editPost(int postId, Model model, HttpSession session) {
-		try {
-			title = "Edit post";
-			pageFile = "edit-post";
-			pageInitializer(model, session);
-			
-			PostIndexEntity postIndex = post.postIndex(postId);
-				
-			model.addAttribute("postContent", postIndex);
-			
-			return "base";
-		} catch (Exception e) {
-			return "redirect:/login";
+	public ModelAndView editPost(int postId, HttpSession httpSession) {
+		editPostModel.setBaseContent(httpSession);
+		ModelAndView mav = editPostModel.getModelAndView();
+		
+		boolean isUser = editPostModel.testCredencials(httpSession, USER_ADMIN_LEVEL.admin.toString());
+		
+		if(isUser == false) {
+			mav.clear();
+			mav.setViewName("redirect:/login");
+		}else {
+			editPostModel.addPostInContent(postId);
 		}
+		
+		return mav;
 	}
 
 	@PostMapping(value= "/editPost/{postId}")
-	public String editPost(@PathVariable int postId, String dateStr, PostIndexEntity postIndex, HttpSession httpSession, Model model) {
-		try{
-			login.userTestCredencial(httpSession, USER_ADMIN_LEVEL.admin);
-			
-			dateStr = dateStr.replace('-', '/');
-			Date date = new SimpleDateFormat("yyyy/MM/dd").parse(dateStr);
-			
-			postIndex.setDate(date);
-			
-			PostIndexEntity postDB = post.editPost(httpSession, postId, postIndex);
-			
-			model.addAttribute(MODEL_ATTRIBUTES.page.toString(), "edit-post");
-			model.addAttribute(MODEL_ATTRIBUTES.message.toString(), "Success");
-			model.addAttribute("postContent", postDB);
+	public ModelAndView editPost(@PathVariable int postId, String dateStr, PostIndexEntity postIndex, HttpSession httpSession, Model model) {
+		//formatar data
+		Date date = formatDate(dateStr);
+		postIndex.setDate(date);
 
-			return "base";
-		}catch(Exception e) {
-			System.out.println(e);
-			return "redirect:/login";
+		editPostModel.setBaseContent(httpSession);
+		ModelAndView mav = editPostModel.getModelAndView();
+		
+		boolean isUser = editPostModel.testCredencials(httpSession, "admin");
+		
+		if(isUser == false) {
+			mav.clear();
+			mav.setViewName("redirect:/login");
+		}else {
+			
+			editPostModel.editPost(postId, postIndex);
+			mav.setViewName("redirect:/edit-post");
 		}
+		
+		return mav;
+	}
+	
+	@SuppressWarnings("deprecation")
+	private Date formatDate(String dateStr) {
+		Date date;
+		
+		try {
+			dateStr = dateStr.replace('-', '/');
+		
+			date = new SimpleDateFormat("yyyy/MM/dd").parse(dateStr);
+		} catch (ParseException e) {
+			date = new Date(1999, 12, 12);
+		}
+		
+		return date;
 	}
 }

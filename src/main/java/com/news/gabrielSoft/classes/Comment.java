@@ -12,21 +12,18 @@ import com.news.gabrielSoft.repository.CommentRepository;
 import com.news.gabrielSoft.repository.PostIndexRepository;
 
 @Service
-public class Comment {
+public class Comment {	
 	@Autowired
-	Session login;
+	private CommentRepository commentRep;
 
 	@Autowired
-	CommentRepository commentRep;
+	private PostIndexRepository postRep;
 
-	@Autowired
-	PostIndexRepository postRep;
-
-	public void newComment(HttpSession httpSession, int postId, CommentEntity comment) throws Exception {
+	public void newComment(int postId, HttpSession httpSession, CommentEntity comment){
 		if(comment.getText().length() != 0) {
 			PostIndexEntity postIndex = postRep.findById(postId);
+			
 			UserEntity user = (UserEntity) httpSession.getAttribute("user");
-			user = login.userTestCredencial(httpSession);
 			
 			comment.setUser(user);
 			comment.setPostIndex(postIndex);

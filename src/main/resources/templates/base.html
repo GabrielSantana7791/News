@@ -12,9 +12,9 @@
 		th:replace="~{fragments/navibar :: navibar}"></nav>
 
 	<div class="container alert alert-success" role="alert"
-		th:if="${message}" th:text="${message}"></div>
+		th:if="${#request.getParameter('message')}" th:text="${#request.getParameter('message')}"></div>
 	<div class="container alert alert-danger" role="alert"
-		th:if="${errorMessage}" th:text="${errorMessage}"></div>
+		th:if="${#request.getParameter('errorMessage')}" th:text="${#request.getParameter('errorMessage')}"></div>
 		
 	<div class="container" th:replace="~{'pages/' + ${page} :: section }"></div>
 

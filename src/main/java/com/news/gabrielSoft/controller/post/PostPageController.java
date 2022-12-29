@@ -1,47 +1,27 @@
 package com.news.gabrielSoft.controller.post;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.news.gabrielSoft.classes.Page;
-import com.news.gabrielSoft.classes.Post;
-import com.news.gabrielSoft.entity.CommentEntity;
-import com.news.gabrielSoft.entity.PostIndexEntity;
-import com.news.gabrielSoft.repository.CommentRepository;
-import com.news.gabrielSoft.util.MODEL_ATTRIBUTES;
+import com.news.gabrielSoft.models.post.PostPageModel;
 
 @Controller
-public class PostPageController extends Page{	
+public class PostPageController{	
 	@Autowired
-	public CommentRepository commentRep;
-	
-	@Autowired
-	public Post post;
+	private PostPageModel postPageModel;
 
 	@GetMapping(value="/postCode/{postCode}")
-	public String postController(@PathVariable int postCode, Model model, HttpSession httpSession) {
-		try {
-			title = "Post";
-			pageFile = "post-page";
-			pageInitializer(model, httpSession);
-		} catch (Exception e) {
-			//ignore
-		}
+	public ModelAndView postPage(@PathVariable int postCode, HttpSession httpSession) {
+		postPageModel.setBaseContent(httpSession);
+		postPageModel.searchPost(postCode);
 		
-		PostIndexEntity post = this.post.postIndex(postCode);
-		this.post.addViewNumber(postCode);
-		List<CommentEntity> comments = post.getComments();
+		ModelAndView mav = postPageModel.getModelAndView();
 		
-		model.addAttribute("comments", comments);
-		model.addAttribute(MODEL_ATTRIBUTES.section.toString(), post);
-		
-		return "base";
+		return mav;
 	}
 }
