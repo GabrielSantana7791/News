@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.news.gabrielSoft.entity.CommentEntity;
 import com.news.gabrielSoft.models.post.CommentModel;
-import com.news.gabrielSoft.util.USER_ADMIN_LEVEL;
 
 @Controller
 public class CommentController {	
@@ -23,7 +22,7 @@ public class CommentController {
 		commentModel.setBaseContent(httpSession);
 		ModelAndView mav = commentModel.getModelAndView();
 		
-		boolean isUser = commentModel.testCredencials(httpSession, USER_ADMIN_LEVEL.user.toString());
+		boolean isUser = commentModel.testCredencials(httpSession);
 		
 		if(isUser == false) {
 			mav.clear();

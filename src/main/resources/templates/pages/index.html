@@ -14,7 +14,7 @@
 						<a th:href="'postCode/' + ${top3[0].id}" class="h6"
 							th:text="${top3[0].title}"></a>
 						<p th:text="${top3[0].summary}"></p>
-						<p th:text="@{Visualizações:} + ' ' + ${top3[0].viewNumber}"></p>
+						<p th:text="@{View count:} + ' ' + ${top3[0].viewNumber}"></p>
 					</div>
 				</div>
 				<div th:unless="${top3.length >= 1}" class="card mb-4 box-shadow">
